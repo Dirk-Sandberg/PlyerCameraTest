@@ -45,6 +45,14 @@ class CameraDemo(FloatLayout):
 class MainApp(App):
     demo = None
 
+    def on_start(self):
+        from android.permissions import request_permissions, Permission
+
+        def callback(permissions, results):
+            print(permissions, results)
+
+        request_permissions([Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE], callback)
+
     def build(self):
         self.demo = CameraDemo()
         return self.demo
